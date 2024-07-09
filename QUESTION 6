@@ -1,0 +1,27 @@
+def words(n):
+    if n == 1000:
+        return "onethousand"
+    
+    ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+    teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+    tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+    
+    word = ""
+    
+    if n >= 100:
+        word += ones[n // 100] + "hundred"
+        n %= 100
+        if n != 0:
+            word += "and"
+    
+    if 10 <= n < 20:
+        word += teens[n - 10]
+    else:
+        word += tens[n // 10]
+        n %= 10
+        word += ones[n]
+    
+    return word
+
+totalletters = sum(len(words(i)) for i in range(1, 1001))
+totalletters
