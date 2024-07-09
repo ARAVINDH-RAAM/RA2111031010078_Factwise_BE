@@ -1,0 +1,27 @@
+def maxScore(cardPoints, k):
+    n = len(cardPoints)
+    total_sum = sum(cardPoints)
+    
+    if k == n:
+        return total_sum
+    
+    window_size = n - k
+    current_subarray_sum = sum(cardPoints[:window_size])
+    min_subarray_sum = current_subarray_sum
+    
+    for i in range(window_size, n):
+        current_subarray_sum += cardPoints[i] - cardPoints[i - window_size]
+        min_subarray_sum = min(min_subarray_sum, current_subarray_sum)
+    
+    return total_sum - min_subarray_sum
+
+# Get input from user
+cardPoints_input = input()
+k_input = int(input())
+
+# Convert the input string to a list of integers
+cardPoints = list(map(int, cardPoints_input.split(',')))
+
+# Call the function with user inputs
+result = maxScore(cardPoints, k_input)
+print(f"The maximum score you can obtain is: {result}")
